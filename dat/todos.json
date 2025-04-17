@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Updated Integration Path",
+        "description": "This is created using automated Integration tests.",
+        "doneStatus": true,
+        "id": "7f3d774efcad4dcbbccd891c2b121860"
+    },
+    {
+        "title": "New Task",
+        "description": "This task was added using add_todo function",
+        "doneStatus": false,
+        "id": "c83a08869eda4f57ae8d2b40d4edeaf9"
+    },
+    {
+        "title": "New Task",
+        "description": "This task was added using add_todo function",
+        "doneStatus": false,
+        "id": "e4f7ce745af7400eadcef6ce0aef29c0"
+    },
+    {
+        "title": "New Task",
+        "description": "This task was added using add_todo function",
+        "doneStatus": false,
+        "id": "3c1cd9c8b733412abc89ffd319c96a74"
+    }
+]
