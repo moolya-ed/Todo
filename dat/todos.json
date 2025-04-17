@@ -22,5 +22,11 @@
         "description": "This task was added using add_todo function",
         "doneStatus": false,
         "id": "3c1cd9c8b733412abc89ffd319c96a74"
+    },
+    {
+        "title": "New Task",
+        "description": "This task was added using add_todo function",
+        "doneStatus": false,
+        "id": "791855d6e9ab4f1dab49cd1d0a52d403"
     }
 ]
