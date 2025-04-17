@@ -78,23 +78,5 @@ def add_todo(title, description, doneStatus):
     print(new_todo)
     return new_todo  # In case we want to use it
 
-# Run and print
-todos = load_list()
-print(todos)
-
-print(get_todo_details("8af52e54045b423aabaa9bcf7003ff4d"))
-
-save_list(todos)
-
-remove_todo("8af52e54045b423aabaa9bcf7003ff4d")
-
-update_todo("7f3d774efcad4dcbbccd891c2b121860", {
-    "title": "Updated Integration Path",
-    "doneStatus": True
-})
-
-new_id = generate_id()
-print("Generated new ID:", new_id)
-
-# Add a new todo
-add_todo("New Task", "This task was added using add_todo function", False)
+todo = load_list()
+print(todo)
