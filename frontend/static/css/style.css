@@ -1,0 +1,153 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Header */
+  h1 {
+    color: #222;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+  }
+  
+  /* Menu */
+  .crud-links {
+    margin-bottom: 30px;
+  }
+  
+  .crud-links a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    margin: 0 15px;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  
+  .crud-links a:hover {
+    color: #0056b3;
+  }
+  
+  /* Content Area */
+  #content-area {
+    margin-top: 20px;
+  }
+  
+  /* Form */
+  form {
+    margin: 0 auto;
+    width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+  
+  form label {
+    margin-top: 10px;
+    display: block;
+    font-weight: bold;
+  }
+  
+  form input[type="text"],
+  form input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  form input[type="checkbox"] {
+    width: auto;
+  }
+  
+  form button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  /* Buttons */
+  .btn-green {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-green:hover {
+    background-color: #218838;
+  }
+  
+  .btn-blue {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-blue:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-red {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn-red:hover {
+    background-color: #c82333;
+  }
+  
+  /* Todo List */
+  #todo-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #todo-list li {
+    background: #ffffff;
+    margin: 10px auto;
+    padding: 15px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+  
+  /* Pagination */
+  .pagination {
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    margin: 0 8px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+  }
+  
+  /* Action Buttons */
+  .action-box {
+    margin-top: 20px;
+  }
+  

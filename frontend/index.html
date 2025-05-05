@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Todo App - Home</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <h1>Welcome to the Todo App</h1>
+
+  <!-- Menu -->
+  <div class="crud-links">
+    <a href="#" id="read-todo-link">Read Todos</a> |
+    <a href="#" id="create-todo-link">Create Todo</a> |
+    <a href="#" id="update-todo-link">Update Todo</a> |
+    <a href="#" id="delete-todo-link">Delete Todo</a>
+  </div>
+
+  <!-- Dynamic Content -->
+  <div id="content-area"></div>
+
+  <!-- Pagination -->
+  <div id="pagination-controls" class="pagination" style="display: none;">
+    <button id="prev-page">Previous</button>
+    <span id="page-info"></span>
+    <button id="next-page">Next</button>
+  </div>
+
+  <script>
+    let currentPage = 1;
+    const todosPerPage = 5;
+
+    async function fetchTodos() {
+      const response = await fetch('http://127.0.0.1:8000/todos/');
+      const todos = await response.json();
+
+      const contentArea = document.getElementById('content-area');
+      contentArea.innerHTML = '<ul id="todo-list"></ul>';
+      const todoList = document.getElementById('todo-list');
+
+      const startIndex = (currentPage - 1) * todosPerPage;
+      const endIndex = startIndex + todosPerPage;
+      const paginatedTodos = todos.slice(startIndex, endIndex);
+
+      paginatedTodos.forEach(todo => {
+        const li = document.createElement('li');
+        li.textContent = `${todo.title}: ${todo.description}`;
+        todoList.appendChild(li);
+      });
+
+      document.getElementById('pagination-controls').style.display = 'block';
+      updatePaginationControls(todos.length);
+    }
+
+    function updatePaginationControls(totalTodos) {
+      const pageInfo = document.getElementById('page-info');
+      const totalPages = Math.ceil(totalTodos / todosPerPage);
+      pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+
+      document.getElementById('prev-page').disabled = currentPage === 1;
+      document.getElementById('next-page').disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    document.getElementById('prev-page').addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        fetchTodos();
+      }
+    });
+
+    document.getElementById('next-page').addEventListener('click', () => {
+      currentPage++;
+      fetchTodos();
+    });
+
+    function showCreateForm() {
+      document.getElementById('pagination-controls').style.display = 'none';
+      document.getElementById('content-area').innerHTML = `
+        <form id="todo-form">
+          <label for="title">Title</label>
+          <input type="text" id="title" placeholder="Enter title" required>
+
+          <label for="description">Description</label>
+          <input type="text" id="description" placeholder="Enter description" required>
+
+          <label for="done-status">Done</label>
+          <input type="checkbox" id="done-status">
+
+          <button type="submit" class="btn-green">Add Todo</button>
+        </form>
+      `;
+
+      document.getElementById('todo-form').addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const doneStatus = document.getElementById('done-status').checked;
+
+        const newTodo = { title, description, doneStatus };
+
+        const response = await fetch('http://127.0.0.1:8000/todos/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newTodo)
+        });
+
+        if (response.ok) {
+          alert('Todo added successfully!');
+          showReadForm();
+        } else {
+          alert('Error adding Todo');
+        }
+      });
+    }
+
+    function showUpdateForm() {
+      document.getElementById('pagination-controls').style.display = 'none';
+      document.getElementById('content-area').innerHTML = `
+        <div class="action-box">
+          <button class="btn-blue" onclick="promptUpdateTodo()">Update a Todo</button>
+        </div>
+      `;
+    }
+
+    async function promptUpdateTodo() {
+      const todoId = prompt('Enter the ID of the Todo to update:');
+      if (!todoId) return;
+
+      const newTitle = prompt('Enter new title:');
+      const newDescription = prompt('Enter new description:');
+      const newDoneStatus = confirm('Is this task done?');
+
+      const updatedTodo = { id: todoId, title: newTitle, description: newDescription, doneStatus: newDoneStatus };
+
+      const response = await fetch(`http://127.0.0.1:8000/todos/${todoId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedTodo)
+      });
+
+      if (response.ok) {
+        alert('Todo updated successfully!');
+        showReadForm();
+      } else {
+        alert('Error updating Todo');
+      }
+    }
+
+    function showDeleteForm() {
+      document.getElementById('pagination-controls').style.display = 'none';
+      document.getElementById('content-area').innerHTML = `
+        <div class="action-box">
+          <button class="btn-red" onclick="promptDeleteTodo()">Delete a Todo</button>
+        </div>
+      `;
+    }
+
+    async function promptDeleteTodo() {
+      const todoId = prompt('Enter the ID of the Todo to delete:');
+      if (!todoId) return;
+
+      const confirmed = confirm('Are you sure you want to delete this Todo?');
+      if (!confirmed) return;
+
+      const response = await fetch(`http://127.0.0.1:8000/todos/${todoId}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        alert('Todo deleted successfully!');
+        showReadForm();
+      } else {
+        alert('Error deleting Todo');
+      }
+    }
+
+    function showReadForm() {
+      document.getElementById('pagination-controls').style.display = 'block';
+      fetchTodos();
+    }
+
+    // Event Listeners
+    document.getElementById('read-todo-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showReadForm();
+    });
+
+    document.getElementById('create-todo-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showCreateForm();
+    });
+
+    document.getElementById('update-todo-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showUpdateForm();
+    });
+
+    document.getElementById('delete-todo-link').addEventListener('click', (e) => {
+      e.preventDefault();
+      showDeleteForm();
+    });
+  </script>
+
+</body>
+</html>
