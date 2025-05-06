@@ -38,9 +38,12 @@ The todos are stored in a JSON file located at `data/todos.json`. Each todo is r
 - `title`: The name or title of the todo.
 - `description`: A brief description of the todo.
 - `doneStatus`: A boolean (True/False) indicating if the todo has been completed.
+<<<<<<< HEAD
 
 ##  Architecture Diagram
 
 ![To-Do App Architecture](images/todo.drawio.png)
 
 
+=======
+>>>>>>> 7a4207825aaaaf9dc0af79112147eebae8680b55
