@@ -41,5 +41,7 @@ The todos are stored in a JSON file located at `data/todos.json`. Each todo is r
 
 ##  Architecture Diagram
 
-![To-Do App Architecture](images/todo.drawio.png)
+![To-Do App Architecture](frontend/assets/todo.drawio.png)
 
+
+# Todo
